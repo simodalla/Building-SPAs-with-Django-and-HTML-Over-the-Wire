@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  python:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    # entrypoint: bash start-project.sh
+    entrypoint: python3 manage.py runserver 0.0.0.0:8000
+    # entrypoint: sleep 10000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/app
