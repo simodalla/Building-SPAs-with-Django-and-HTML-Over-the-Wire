@@ -337,3 +337,6 @@ profile.*
 .editorconfig
 pyproject.toml
 setup.cfg
+
+static
+postgres_data
