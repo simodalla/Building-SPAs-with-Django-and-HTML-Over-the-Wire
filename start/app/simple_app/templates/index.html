@@ -5,6 +5,18 @@
     <title> Index </title>
 </head>
 <body>
-    <h1> Hello Django! <h1>
+    <h1>Hello Django!</h1>
+    <h2 id="welcome"></h2>
+
+    <script>
+        const myWebSocket = new WebSocket("ws://{{ request.get_host }}/ws/echo/");
+
+        myWebSocket.addEventListener("message",
+            (event) => {
+                // Display the message
+                document.querySelector("#welcome").textContent = event.data;
+            }
+        );
+    </script>
 </body>
 </html>
