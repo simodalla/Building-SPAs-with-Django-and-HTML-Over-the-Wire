@@ -1,0 +1,4 @@
+-r base.txt
+
+# PostgreSQL driver
+psycopg2-binary===2.9.1

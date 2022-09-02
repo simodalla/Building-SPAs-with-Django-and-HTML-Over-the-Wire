@@ -1,3 +1,4 @@
+-r start/requirements/local.txt
 # code quality
 flake8
 black
