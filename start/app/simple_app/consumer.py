@@ -3,6 +3,8 @@ import time
 from datetime import datetime
 from random import randint
 
+from django.template.loader import render_to_string
+
 from channels.generic.websocket import JsonWebsocketConsumer, WebsocketConsumer
 
 
@@ -55,3 +57,25 @@ class BingoConsumer(JsonWebsocketConsumer):
 
     def receive_json(self, content, **kwargs):
         return super().receive_json(content, **kwargs)
+
+
+class BmiConsumer(JsonWebsocketConsumer):
+    def connect(self):
+        self.accept()
+
+    def disconnect(self, code):
+        pass
+
+    def receive_json(self, data, **kwargs):
+        height = data["height"] / 100
+        weight = data["weight"]
+        bmi = round(weight / (height**2), 1)
+        self.send_json(
+            content={
+                "action": "BMI result",
+                "html": render_to_string(
+                    "components/_bmi_result.html",
+                    {"height": height, "weight": weight, "bmi": bmi},
+                ),
+            }
+        )

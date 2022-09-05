@@ -12,7 +12,7 @@ import os
 from django.core.asgi import get_asgi_application
 from django.urls import re_path
 
-from app.simple_app.consumer import BingoConsumer, EchoConsumer
+from app.simple_app.consumer import BingoConsumer, BmiConsumer, EchoConsumer
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 
@@ -26,6 +26,7 @@ application = ProtocolTypeRouter(
                 [
                     re_path(r"^ws/echo/$", EchoConsumer.as_asgi()),
                     re_path(r"^ws/bingo/$", BingoConsumer.as_asgi()),
+                    re_path(r"^ws/bmi/$", BmiConsumer.as_asgi()),
                 ]
             )
         ),
